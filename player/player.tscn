@@ -1,0 +1,143 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://player/container.gd" type="Script" id=2]
+[ext_resource path="res://player/interact_label.gd" type="Script" id=3]
+[ext_resource path="res://addons/debug_utility/Debug.gd" type="Script" id=4]
+[ext_resource path="res://player/debug_label.gd" type="Script" id=5]
+[ext_resource path="res://player/reticledotgreen.png" type="Texture" id=6]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.25
+height = 0.9
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.25
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Player" type="KinematicBody" parent="."]
+collision_mask = 6
+script = ExtResource( 1 )
+webShoot_ray_length = -8.9
+hookin_speed = 3.0
+
+[node name="BodyCollision" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Head" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45764, 0 )
+
+[node name="CameraXPivot" type="Spatial" parent="Player/Head"]
+
+[node name="Camera" type="Camera" parent="Player/Head/CameraXPivot"]
+current = true
+fov = 90.0
+far = 250.0
+
+[node name="Crosshair" type="RayCast" parent="Player/Head/CameraXPivot"]
+enabled = true
+cast_to = Vector3( 0, 0, -3 )
+collision_mask = 6
+collide_with_areas = true
+debug_shape_custom_color = Color( 0.615686, 0.027451, 0.552941, 0.376471 )
+
+[node name="reticle" type="Sprite3D" parent="Player/Head/CameraXPivot/Crosshair"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, -1 )
+opacity = 0.45
+texture = ExtResource( 6 )
+
+[node name="Container" type="Spatial" parent="Player/Head/CameraXPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+script = ExtResource( 2 )
+
+[node name="WebCast" type="RayCast" parent="Player/Head/CameraXPivot"]
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 8
+collide_with_areas = true
+
+[node name="TopHeadRayCast" type="RayCast" parent="Player/Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.775, 0 )
+enabled = true
+cast_to = Vector3( 0, 1, 0 )
+collision_mask = 6
+
+[node name="GUI" type="Control" parent="Player"]
+margin_right = 1080.0
+margin_bottom = 961.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="Control" parent="Player/GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Player/GUI/HUD"]
+anchor_left = 7.225
+anchor_top = 6.725
+anchor_right = 11.05
+anchor_bottom = 8.75
+margin_left = -33.0
+margin_top = -13.0
+margin_right = -54.0
+margin_bottom = -33.0
+rect_scale = Vector2( 4, 4 )
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.0784314, 0.0784314, 0.0823529, 1 )
+custom_constants/shadow_as_outline = 1
+align = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+crp = NodePath("../../../Head/CameraXPivot/Crosshair")
+
+[node name="DB" type="Label" parent="Player/GUI/HUD"]
+visible = false
+margin_right = 245.0
+margin_bottom = 127.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+player = NodePath("../../..")
+ch = NodePath("../../../Head/CameraXPivot/Crosshair")
+
+[node name="db2" type="Label" parent="Player/GUI/HUD"]
+visible = false
+margin_left = 1.0
+margin_top = 66.0
+margin_right = 41.0
+margin_bottom = 80.0
+script = ExtResource( 5 )
+
+[node name="DebugPanel" type="VBoxContainer" parent="Player/GUI/HUD"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+
+[node name="HookPoint" type="RigidBody" parent="Player"]
+collision_mask = 6
+
+[node name="CollisionShape" type="CollisionShape" parent="Player/HookPoint"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="PinJoint" type="PinJoint" parent="Player/HookPoint"]
+nodes/node_a = NodePath("..")
+params/bias = 0.99
+params/damping = 2.0

@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://states/MainMenuState.gd" type="Script" id=1]
+[ext_resource path="res://states/menuStatic.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/soundtrack/ManSp.ogg" type="AudioStream" id=3]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource( 1 )
+game_scene_path = "res://states/GameState.tscn"
+
+[node name="TextureRect" parent="." instance=ExtResource( 2 )]
+frame = 3
+speed_scale = 2.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.358
+anchor_top = 0.674
+anchor_right = 0.697
+anchor_bottom = 0.915
+margin_left = -4.64001
+margin_top = -19.04
+margin_right = -308.76
+margin_bottom = -166.4
+rect_scale = Vector2( 4, 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_right = 63.0
+margin_bottom = 68.0
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 63.0
+margin_bottom = 20.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "Start"
+flat = true
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 63.0
+margin_bottom = 44.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "Settings"
+flat = true
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 63.0
+margin_bottom = 68.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "Quit"
+flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

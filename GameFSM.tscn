@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameFSM.gd" type="Script" id=1]
+[ext_resource path="res://states/MainMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/debug_utility/Debug.tscn" type="PackedScene" id=4]
+
+[node name="root" type="Node"]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+start_state = NodePath("MainMenu")
+pause_scene_path = "res://states/PauseState.tscn"
+
+[node name="MainMenu" parent="StateMachine" instance=ExtResource( 3 )]
+
+[node name="Debug" parent="." instance=ExtResource( 4 )]
+
+[connection signal="gamepaused" from="StateMachine" to="StateMachine" method="_on_StateMachine_gamepaused"]
+[connection signal="mousemode" from="StateMachine" to="StateMachine" method="_on_StateMachine_mousemode"]

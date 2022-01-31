@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/assets/Dark/texture_12.png" type="Texture" id=1]
+[ext_resource path="res://levels/assets/Light/texture_11.png" type="Texture" id=2]
+[ext_resource path="res://assets/mannequin_skywalker.tscn" type="PackedScene" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.956213, -0.292672, 0, 0.292672, 0.956213, 0.0295329, 9.808, 6.63145 )
+use_collision = true
+collision_layer = 8
+width = 53.7959
+material = SubResource( 1 )
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68517, 17.4795, -7.75579 )
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+depth = 19.0797
+material = SubResource( 1 )
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.176819, 4.93064, 15.7374 )
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+width = 14.5593
+material = SubResource( 1 )
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0902, 6.26417, 1.16789 )
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+depth = 38.9145
+material = SubResource( 2 )
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97846, 13.5787, -8.18738 )
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+width = 40.9293
+material = SubResource( 2 )
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 0.978173, 0.207792, 0, -0.207792, 0.978173, 0, 0, 0, 1, 5.97846, 6.05526, -8.18738 )
+use_collision = true
+collision_layer = 8
+collision_mask = 7
+height = 11.4201
+material = SubResource( 2 )
+
+[node name="mannequiny-030" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10 )
