@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Shkrt.ogg-f370f5e2a6e9111da3ebdf932ef9e126.oggstr"
+
+[deps]
+
+source_file="res://assets/soundtrack/Shkrt.ogg"
+dest_files=[ "res://.import/Shkrt.ogg-f370f5e2a6e9111da3ebdf932ef9e126.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
